@@ -141,7 +141,6 @@ func ReadMyCnf() (username, password string, err error) {
 				break
 			}
 		}
-
 	}
 	return
 }
