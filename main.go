@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/user"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -104,9 +105,16 @@ func GetRow(db *sql.DB, query string) (row map[string]string, err error) {
 }
 
 func PrintRow(row map[string]string) {
-	for key, value := range row {
-		fmt.Printf("[%s] = [%s]\n", key, value)
+	keys := make([]string, 0, len(row))
+	for key := range row {
+		keys = append(keys, key)
 	}
+	sort.Strings(keys)
+
+	for _, key := range keys {
+		fmt.Printf("[%s] = [%s]\n", key, row[key])
+	}
+	fmt.Println()
 }
 
 func ReadMyCnf() (username, password string, err error) {
