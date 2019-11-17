@@ -128,8 +128,6 @@ func ReadMyCnf() (username, password string, err error) {
 	for scanner.Scan() {
 		s := scanner.Text()
 		s = strings.ReplaceAll(s, " ", "")
-		fmt.Println(s)
-
 		if strings.Contains(s, "=") {
 			elems := strings.Split(s, "=")
 			if elems[0] == "user" {
